@@ -1,0 +1,13 @@
+package com.web.erp.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.web.erp.vo.RegSaleHistory;
+
+@Mapper
+public interface RegSaleHistoryDao {
+	public List<RegSaleHistory> stList();
+	public List<RegSaleHistory> schPrdByName(RegSaleHistory rsh);
+}

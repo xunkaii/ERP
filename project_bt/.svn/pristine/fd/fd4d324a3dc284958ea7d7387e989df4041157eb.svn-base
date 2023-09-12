@@ -1,0 +1,22 @@
+package com.web.erp.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.web.erp.util.ChatHandler;
+
+@Controller
+public class ChattingController {
+	@Autowired
+	private ChatHandler chatHanler;
+	
+	@GetMapping("getChatMem")
+	public ResponseEntity<Integer> getChatMem(){
+		return ResponseEntity.ok(chatHanler.getIds());
+	}
+	
+}

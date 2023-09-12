@@ -1,0 +1,23 @@
+package com.web.erp.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.web.erp.dao.RegSaleHistoryDao;
+import com.web.erp.vo.RegSaleHistory;
+
+@Service
+public class RegSaleHistoryService {
+	@Autowired
+	private RegSaleHistoryDao dao;
+	
+	public List<RegSaleHistory> stList(){
+		return dao.stList();
+	}
+	public List<RegSaleHistory> schPrdByName(RegSaleHistory rsh){
+		if(rsh.getItem_name()==null) rsh.setItem_name("");
+		return dao.schPrdByName(rsh);
+	}
+}

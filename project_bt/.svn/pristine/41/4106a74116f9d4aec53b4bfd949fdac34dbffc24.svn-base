@@ -1,0 +1,34 @@
+package com.web.erp.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.web.erp.service.RegSaleHistoryService;
+import com.web.erp.vo.RegSaleHistory;
+
+@Controller
+public class SaleHistoryController {
+	@Autowired
+	private RegSaleHistoryService service;
+	
+	
+	@GetMapping("regSaleHistory")
+	public String regSaleHistory() {
+		return "regSaleHistory";
+	}
+	
+	@RequestMapping("rshStList")
+	public ResponseEntity<List<RegSaleHistory>> stList(){
+		return ResponseEntity.ok(service.stList());
+	}
+	@RequestMapping("schPrdByName")
+	public ResponseEntity<List<RegSaleHistory>> schPrdByName(RegSaleHistory rsh){
+		return ResponseEntity.ok(service.schPrdByName(rsh));
+	}
+	
+}

@@ -1,0 +1,10 @@
+package com.web.erp.dao;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.web.erp.vo.Employee;
+
+@Mapper
+public interface SessionDao {
+	public Employee sessionEmp(String id, String password);
+}

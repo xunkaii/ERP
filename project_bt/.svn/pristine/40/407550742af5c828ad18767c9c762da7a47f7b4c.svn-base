@@ -1,0 +1,19 @@
+package com.web.erp.vo;
+
+import java.util.Date;
+
+public class PrmSch {
+	private int employee_num;
+	private String employee_name;
+	private String store_name;
+	private String job_level;
+	private String phone_num;
+	private Date hire_date;
+	private Date resignation_day;
+	
+	public PrmSch() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+}

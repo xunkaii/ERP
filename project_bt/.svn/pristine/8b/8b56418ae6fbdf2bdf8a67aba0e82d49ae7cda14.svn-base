@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >	
+<mapper namespace="com.web.erp.dao.PrmDao">
+	<select id="prm_getStoreName" parameterType="prm" resultType="prm">
+		SELECT store_num, store_name FROM store
+		WHERE store_name LIKE '%'||#{store_name}||'%'
+		ORDER BY store_num
+	</select>
+	
+	<select id="prm_empList" resultType="prm">
+		SELECT e.employee_num, e.employee_name, s.store_name, e.job_level, 
+				e.phone_num, e.hire_date, e.resignation_day	
+		FROM EMPLOYEE e, STORE s 
+		WHERE e.store_num = s.STORE_NUM
+		ORDER BY e.resignation_day desc, e.employee_num 
+	</select>
+	
+	<select id="empDetail" parameterType="int" resultType="prm">
+		SELECT e.employee_num, e.employee_name, s.store_num, s.store_name, e.password, e.email, e.job_level, 
+				e.hire_date, e.hire_type, e.resignation_day, e.phone_num, e.employee_photo, e.auth 	
+		FROM EMPLOYEE e, STORE s 
+		WHERE e.store_num = s.store_num
+		AND e.employee_num=#{employee_num}
+	</select>
+	
+	<insert id="insertEmployee" parameterType="prm">
+		INSERT INTO EMPLOYEE (employee_num, store_num, employee_name, id, password, 
+						email, phone_num, job_level, hire_date, hire_type, auth) 
+		VALUES (emp_seq.nextval, #{store_num}, #{employee_name}, #{id}, #{password}, #{email},
+				#{phone_num}, #{job_level}, #{hire_date}, #{hire_type}, #{auth})
+	</insert>
+	<select id="schSeq">
+		SELECT emp_seq.currval FROM dual
+	</select>
+	<update id="updatePhoto" parameterType="prm">
+		update employee set employee_photo = #{employee_photo}
+		where employee_num = #{employee_num} and employee_name = #{employee_name}
+	</update>
+	
+	<select id="schStorekeeper" parameterType="prm" resultType="prm">
+		SELECT job_level
+		FROM employee WHERE store_num=#{store_num} AND job_level='점주'
+	</select>
+	
+	<update id="uptEmployee" parameterType="prm">
+		update employee set store_num= #{store_num}, employee_name = #{employee_name}, id = #{id}, password = #{password}, 
+		email = #{email}, phone_num = #{phone_num}, job_level = #{job_level}, 
+		hire_date = #{hire_date}, hire_type = #{hire_type}, resignation_day = #{resignation_day}, auth = #{auth}
+		where employee_num = #{employee_num}
+	</update>
+	
+	<select id="chkEmp" parameterType="prm" resultType="prm">
+		select employee_num, e.store_num, store_name, employee_name, id, password, job_level
+		from employee e ,STORE s
+		where e.store_num=s.store_num and id=#{id} and password=#{password}
+	</select>
+	
+	<delete id="delEmployee" parameterType="prm">
+		DELETE FROM employee WHERE employee_num=#{employee_num} and
+		 employee_name=#{employee_name} and resignation_day=#{resignation_day}
+	</delete>
+	
+	
+</mapper>	

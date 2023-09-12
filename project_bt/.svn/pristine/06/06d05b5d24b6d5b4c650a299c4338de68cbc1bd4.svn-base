@@ -1,0 +1,40 @@
+package com.web.erp.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.web.erp.vo.Prm;
+import com.web.erp.vo.PrmSch;
+
+
+@Mapper
+public interface PrmDao {
+	
+	public List<Prm> prm_getStoreName(Prm prm_store);
+	
+	public List<Prm> prm_empList(Prm sch);
+	
+	public Prm empDetail(int employee_num);
+	
+	public int insertEmployee(Prm insert);
+	public int schSeq(); 
+	
+	public int updatePhoto(String employee_photo, int employee_num, String employee_name);
+	
+	public Prm schStorekeeper(Prm prm);
+
+	public int uptEmployee(Prm upt);
+	
+	public Prm chkEmp(Prm chk);
+	
+	public int delEmployee(Prm del);
+	
+	public List<PrmSch> schWords(PrmSch prmschW);
+	
+	public List<PrmSch> schDates(PrmSch prmschD);
+	
+	public int schCountW(PrmSch prmschW);
+	
+	public int schCountD(PrmSch prmschD);
+}
